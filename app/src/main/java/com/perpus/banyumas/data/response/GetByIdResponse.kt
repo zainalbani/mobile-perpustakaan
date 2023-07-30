@@ -3,9 +3,9 @@ package com.perpus.banyumas.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class AuthResponse(
+data class GetByIdResponse(
     @SerializedName("data")
-    val `data`: Data,
+    val `data`: DataX,
     @SerializedName("message")
     val message: String,
     @SerializedName("status")

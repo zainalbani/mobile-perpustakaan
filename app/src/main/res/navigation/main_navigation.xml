@@ -34,5 +34,17 @@
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editPasswordFragment"
+            app:destination="@id/editPasswordFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/editPasswordFragment"
+        android:name="com.perpus.banyumas.EditPasswordFragment"
+        android:label="fragment_edit_password"
+        tools:layout="@layout/fragment_edit_password" >
+        <action
+            android:id="@+id/action_editPasswordFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </dialog>
 </navigation>

@@ -41,7 +41,7 @@
                 android:layout_marginTop="45dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/login"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="34sp"
                 android:textStyle="bold"
                 android:textAllCaps="true"

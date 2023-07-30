@@ -107,11 +107,11 @@
 
                             <TextView
 
-                                android:id="@+id/etUserName"
+                                android:id="@+id/tvNama"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="@string/username" />
+                                android:text="Nama Lengkap" />
 
                         </LinearLayout>
 
@@ -128,11 +128,11 @@
                                 android:src="@drawable/ic_baseline_home_work_24"/>
 
                             <TextView
-                                android:id="@+id/etAddress"
+                                android:id="@+id/tvKategori"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="@string/address_profile" />
+                                android:text="Kategori" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -147,11 +147,30 @@
                                 android:padding="10dp" />
 
                             <TextView
-                                android:id="@+id/etPhone"
+                                android:id="@+id/tvPhone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:text="No Hp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_baseline_grid_4x4_24"
+                                android:padding="10dp" />
+
+                            <TextView
+                                android:id="@+id/tvId"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Id Anggota" />
                         </LinearLayout>
 
                     </LinearLayout>

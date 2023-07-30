@@ -12,6 +12,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="TextAppearance.MyApp.TitleInput" parent="TextAppearance.MaterialComponents.Headline4">
@@ -31,6 +33,16 @@
         <!--        <item name="boxCornerRadiusBottomEnd">10dp</item>-->
         <!--        <item name="boxCornerRadiusTopStart">10dp</item>-->
         <!--        <item name="boxCornerRadiusTopEnd">10dp</item>-->
+    </style>
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="TransparentDialogStyle" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
 </resources>

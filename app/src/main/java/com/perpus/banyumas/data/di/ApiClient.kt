@@ -1,11 +1,14 @@
 package com.perpus.banyumas.data.di
 
+import android.content.Context
 import com.perpus.banyumas.data.service.ApiHelper
 import com.perpus.banyumas.data.service.ApiHelperImpl
 import com.perpus.banyumas.data.service.ApiService
+import com.perpus.banyumas.utils.UserDataStoreManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -55,4 +58,8 @@ object ApiClient {
     fun provideApiHelper(apiHelper: ApiHelperImpl): ApiHelper {
         return apiHelper
     }
+
+    @Provides
+    fun getUserManager(@ApplicationContext context: Context): UserDataStoreManager =
+        UserDataStoreManager(context)
 }
