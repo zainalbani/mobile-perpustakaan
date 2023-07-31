@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.perpus.banyumas.adapter.BukuAdapter
+import com.perpus.banyumas.data.response.DataXX
 import com.perpus.banyumas.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,12 +18,14 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: LoginViewModel
+    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -28,8 +33,22 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         setUsername()
         toProfile()
+        setAdapter()
+    }
+
+    private fun setAdapter() {
+        val adapter = BukuAdapter()
+        homeViewModel.getAllBook()
+        homeViewModel.buku.observe(viewLifecycleOwner){
+            if (it != null){
+                adapter.setData(it.data as List<DataXX>)
+            }
+        }
+        binding.rvBuku.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.rvBuku.adapter = adapter
     }
 
     private fun toProfile() {

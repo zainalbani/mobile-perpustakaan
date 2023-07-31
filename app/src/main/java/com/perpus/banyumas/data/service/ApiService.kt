@@ -3,6 +3,7 @@ package com.perpus.banyumas.data.service
 import com.perpus.banyumas.data.request.LoginRequest
 import com.perpus.banyumas.data.request.PasswordRequest
 import com.perpus.banyumas.data.response.AuthResponse
+import com.perpus.banyumas.data.response.GetAllBookResponse
 import com.perpus.banyumas.data.response.GetByIdResponse
 import com.perpus.banyumas.data.response.PasswordResponse
 import retrofit2.Call
@@ -19,6 +20,9 @@ interface ApiService {
 
     @PUT("/update/{idanggota}")
     fun updatePassword(@Body passwordRequest: PasswordRequest, @Path("idanggota") idanggota: String): Call<PasswordResponse>
+
+    @GET("/getallbook")
+    fun getAllBook() : Call<GetAllBookResponse>
 
 
 }

@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_item1"
+        android:icon="@drawable/ic_baseline_grid_4x4_24"
+        android:title="Item 1" />
+    <item
+        android:id="@+id/navigation_item2"
+        android:icon="@drawable/ic_baseline_android_24"
+        android:title="Item 2" />
+
+</menu>

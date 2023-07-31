@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="LoginFragment"
-    android:background="#80CEE1">
+    android:background="#343434">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="90dp"
                 android:layout_toEndOf="@+id/txt_login"
-                app:srcCompat= "@drawable/ic_android_black_24dp" />
+                app:srcCompat= "@drawable/ic_baseline_android_24" />
 
         </LinearLayout>
 
@@ -138,8 +138,8 @@
                     android:layout_height="55dp"
                     android:layout_marginTop="15dp"
                     android:text="@string/login"
-                    android:backgroundTint="#80CEE1"
-                    android:textColor="@color/black"
+                    android:backgroundTint="#0B0C10"
+                    android:textColor="@color/white"
                     app:cornerRadius="10dp" />
 
                 <LinearLayout

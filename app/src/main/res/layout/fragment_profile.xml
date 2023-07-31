@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ProfileFragment"
-    android:background="#80CEE1"
+    android:background="#343434"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
@@ -199,7 +199,9 @@
                             android:id="@+id/txtLogout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="15dp"
                             android:layout_gravity="center"
+                            android:textStyle="bold"
                             android:text="Logout" />
 
                         <ImageView
@@ -207,8 +209,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:backgroundTint="#00000000"
-                            app:tint="@color/white" />
+                            android:src="@drawable/ic_baseline_logout_24"/>
 
                     </LinearLayout>
 
