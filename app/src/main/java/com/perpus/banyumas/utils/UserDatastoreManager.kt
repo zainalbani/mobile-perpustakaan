@@ -24,6 +24,9 @@ class UserDataStoreManager(@ApplicationContext val context: Context) {
     val getId: Flow<String> = context.dataStore.data.map {
         it[ID_USER_KEY] ?: ""
     }
+    val getIdBook: Flow<String> = context.dataStore.data.map {
+        it[ID_BOOK_KEY] ?: ""
+    }
 
     suspend fun saveUsername(username: String) {
         context.dataStore.edit {
@@ -41,6 +44,12 @@ class UserDataStoreManager(@ApplicationContext val context: Context) {
     suspend fun saveId(idanggota: String) {
         context.dataStore.edit {
             it[ID_USER_KEY] = idanggota
+        }
+    }
+
+    suspend fun saveIdBook(idbuku: String) {
+        context.dataStore.edit {
+            it[ID_BOOK_KEY] = idbuku
         }
     }
 
@@ -62,11 +71,18 @@ class UserDataStoreManager(@ApplicationContext val context: Context) {
         }
     }
 
+    suspend fun removeIdBook() {
+        context.dataStore.edit {
+            it.remove(ID_BOOK_KEY)
+        }
+    }
+
 
     companion object {
         private const val DATASTORE_NAME = "user_preferences"
         private val USERNAME_KEY = stringPreferencesKey("username_key")
         private val ID_USER_KEY = stringPreferencesKey("id_user_key")
+        private val ID_BOOK_KEY = stringPreferencesKey("id_book_key")
         private val IS_LOGIN_KEY = booleanPreferencesKey("is_login_key")
         private val Context.dataStore by preferencesDataStore(
             name = DATASTORE_NAME

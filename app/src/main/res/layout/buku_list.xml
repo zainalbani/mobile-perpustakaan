@@ -20,7 +20,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvIdBuku"
+                    android:layout_marginStart="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ID BUKU"
+                    android:fontFamily="@font/rubik_medium"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="25sp" />
 
                 <LinearLayout
                     android:gravity="center_vertical"
@@ -39,20 +48,22 @@
                         android:textSize="25sp" />
 
                     <TextView
-                        android:id="@+id/tvPenerbit"
-                        android:layout_marginStart="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ini penerbit"
-                        android:textSize="15sp"/>
-
-                    <TextView
                         android:id="@+id/tvPengarang"
                         android:layout_marginStart="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ini pengarang"
+                        android:fontFamily="serif"
                         android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvPenerbit"
+                        android:layout_marginStart="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="serif"
+                        android:text="ini penerbit"
+                        android:textSize="15sp"/>
 
                 </LinearLayout>
 

@@ -1,11 +1,10 @@
 package com.perpus.banyumas.data.service
 
+import com.perpus.banyumas.data.request.DetailPinjamRequest
 import com.perpus.banyumas.data.request.LoginRequest
 import com.perpus.banyumas.data.request.PasswordRequest
-import com.perpus.banyumas.data.response.AuthResponse
-import com.perpus.banyumas.data.response.GetAllBookResponse
-import com.perpus.banyumas.data.response.GetByIdResponse
-import com.perpus.banyumas.data.response.PasswordResponse
+import com.perpus.banyumas.data.request.PinjamRequest
+import com.perpus.banyumas.data.response.*
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -23,6 +22,13 @@ interface ApiService {
 
     @GET("/getallbook")
     fun getAllBook() : Call<GetAllBookResponse>
+
+    @POST("/peminjaman")
+    fun postPinjam(@Body request: PinjamRequest) : Call<PinjamResponse>
+
+    @POST("/detailpinjam")
+    fun postDetailPinjam(@Body request: DetailPinjamRequest) : Call<DetailPinjamResponse>
+
 
 
 }

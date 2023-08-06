@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#964B00"
+    android:background="#233D8C"
     tools:context=".HomeFragment">
 
     <LinearLayout
@@ -34,6 +34,14 @@
                 android:text="Ini Home"
                 android:textColor="@color/white" />
         </LinearLayout>
+        <Button
+            android:id="@+id/btnQR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/black"
+            android:text="Scan QR"
+            />
 
 
         <androidx.recyclerview.widget.RecyclerView

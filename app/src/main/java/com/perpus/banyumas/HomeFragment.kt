@@ -37,6 +37,13 @@ class HomeFragment : Fragment() {
         setUsername()
         toProfile()
         setAdapter()
+        scanQR()
+    }
+
+    private fun scanQR() {
+        binding.btnQR.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_scannerFragment)
+        }
     }
 
     private fun setAdapter() {

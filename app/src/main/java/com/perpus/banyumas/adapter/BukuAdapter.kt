@@ -35,9 +35,10 @@ class BukuAdapter : RecyclerView.Adapter<BukuAdapter.ViewHolder>(){
         fun bind(item: DataXX) {
             with(item) {
 
-                binding.tvTitle.text = "Judul : " + item.judul
-                binding.tvPenerbit.text = "Penerbit : " + item.penerbit
-                binding.tvPengarang.text = "Pengarang : " + item.pengarang
+                binding.tvIdBuku.text = item.idbuku
+                binding.tvTitle.text = item.judul
+                binding.tvPenerbit.text = item.penerbit
+                binding.tvPengarang.text = item.pengarang
 
 
             }
