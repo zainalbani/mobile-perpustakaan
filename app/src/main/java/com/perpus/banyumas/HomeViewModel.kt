@@ -4,11 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.perpus.banyumas.data.response.DataXX
+import com.perpus.banyumas.data.response.DataAllBook
 import com.perpus.banyumas.data.response.GetAllBookResponse
-import com.perpus.banyumas.data.response.GetByIdResponse
 import com.perpus.banyumas.data.service.ApiService
-import com.perpus.banyumas.utils.UserDataStoreManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,7 +19,7 @@ class HomeViewModel @Inject constructor(
     application: Application
 ) : AndroidViewModel(application) {
 
-    private val list = ArrayList<DataXX>()
+    private val list = ArrayList<DataAllBook>()
     private val _buku = MutableLiveData<GetAllBookResponse?>()
     val buku: LiveData<GetAllBookResponse?> get() = _buku
 

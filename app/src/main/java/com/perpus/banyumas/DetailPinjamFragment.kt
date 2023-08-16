@@ -16,6 +16,9 @@ import com.perpus.banyumas.data.response.BaseResponse
 import com.perpus.banyumas.data.response.PinjamResponse
 import com.perpus.banyumas.databinding.FragmentDetailPinjamBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.*
 
 @AndroidEntryPoint
 class DetailPinjamFragment : DialogFragment() {
@@ -45,29 +48,94 @@ class DetailPinjamFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.idPinjam.isEnabled = false
+        binding.idAnggota.isEnabled = false
+        binding.idJudulBuku.isEnabled = false
+        binding.idBuku.isEnabled = false
+        val pinjam = arguments?.getString("idPinjam")
+        var kodeBaru = ""
+        if (pinjam != null) {
+            val charSequence = pinjam.subSequence(9, pinjam.length)
+            var substring = charSequence.toString().toInt()
+            substring += 1
+            var noBaru = substring.toString()
+            val jumlahChar = noBaru.length
 
+            if (jumlahChar == 1) {
+                kodeBaru = "00" + noBaru
+            } else if (jumlahChar == 2) {
+                kodeBaru = "0" + noBaru
+            } else {
+                kodeBaru = noBaru
+            }
+
+        } else {
+            kodeBaru = "001"
+        }
+        val currentDate = Date()
+        val dateFormat = SimpleDateFormat("yyyyMMdd")
+        val formattedDate = dateFormat.format(currentDate).toString()
+
+        val idPinjamBaru = formattedDate + kodeBaru
+        binding.idPinjam.setText(idPinjamBaru)
+        Log.d(TAG, "onViewCreated: ${idPinjamBaru}")
+        profileViewModel.getId().observe(viewLifecycleOwner) {
+            binding.idAnggota.setText(it)
+        }
+        viewModel.getIdBook().observe(viewLifecycleOwner) { data ->
+            viewModel.getBookById(data)
+            viewModel.getbuku.observe(viewLifecycleOwner) {
+                binding.idJudulBuku.setText(it?.data?.judul.toString())
+            }
+            binding.idBuku.setText(data)
+        }
+        processCreate()
 
         binding.btnPinjam.setOnClickListener {
-            val idPinjam = arguments?.getString("idPinjam")
-            Log.d(TAG, "onViewCreated:${idPinjam.toString()}")
-            val jmlBuku = binding.etJmlBuku.text.toString()
+            val idAnggota = binding.idAnggota.text.toString()
+            val idBuku = binding.idBuku.text.toString()
+            val idPinjam = binding.idPinjam.text.toString()
+            val judulBuku = binding.idJudulBuku.text.toString()
 
-            viewModel.getIdBook().observe(viewLifecycleOwner) {data ->
-                viewModel.postDetailPinjam(data, idPinjam.toString(), jmlBuku)
-            }
-            findNavController().navigate(R.id.action_detailPinjamFragment_to_homeFragment)
-            viewModel.removeIdBook()
+            viewModel.postPinjam(idPinjam, idBuku, idAnggota)
 
-            val builder = AlertDialog.Builder(requireContext())
-            builder.setTitle("Success")
-            builder.setMessage("Peminjaman Berhasil")
-
-            builder.setPositiveButton("OK") { dialog, which ->
-
-            }
-            val dialog = builder.create()
-            dialog.show()
         }
+    }
+
+    private fun processCreate() {
+        viewModel.pinjamResult.observe(viewLifecycleOwner) {
+            when (it) {
+                is BaseResponse.Success -> {
+                    processUpdate(it.data)
+                }
+                is BaseResponse.Error -> {
+                    processError(it.msg)
+                }
+                else -> {
+                }
+            }
+        }
+    }
+
+    private fun processUpdate(data: PinjamResponse?) {
+        snackBar("${data?.message}", "Success")
+        findNavController().navigate(R.id.action_detailPinjamFragment_to_homeFragment)
+        viewModel.removeIdBook()
+    }
+    private fun processError(msg: String?) {
+        snackBar("$msg","Error")
+    }
+
+    private fun snackBar(msg: String, status: String) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(status)
+        builder.setMessage(msg)
+
+        builder.setPositiveButton("OK") { dialog, which ->
+
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
 }

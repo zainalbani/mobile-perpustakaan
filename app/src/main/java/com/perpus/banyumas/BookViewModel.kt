@@ -24,8 +24,8 @@ class BookViewModel @Inject constructor(
 
     val pinjamResult: MutableLiveData<BaseResponse<PinjamResponse>> = MutableLiveData()
 
-    fun postPinjam(idpinjam: String, tglpinjam: String, idanggota: String, idpetugas: String) {
-        client.postPinjam(PinjamRequest(idanggota, idpetugas, idpinjam, tglpinjam))
+    fun postPinjam(idpinjam: String, idbuku: String, idanggota: String) {
+        client.postPinjam(PinjamRequest(idpinjam, idbuku), idanggota)
             .enqueue(object : Callback<PinjamResponse> {
                 override fun onResponse(
                     call: Call<PinjamResponse>,
@@ -55,37 +55,98 @@ class BookViewModel @Inject constructor(
         pinjamResult
     }
 
-    val detailResult: MutableLiveData<BaseResponse<DetailPinjamResponse>> = MutableLiveData()
-    fun postDetailPinjam(idbuku: String, idpinjam: String, jmlBuku: String) {
-        client.postDetailPinjam(DetailPinjamRequest(idbuku, idpinjam, jmlBuku))
-            .enqueue(object : Callback<DetailPinjamResponse> {
+    private val _pinjamid = MutableLiveData<GetPinjamByIdResponse?>()
+    val pinjamid: LiveData<GetPinjamByIdResponse?> get() = _pinjamid
+
+
+    fun getPinjamById(idanggota: String) {
+        client.getPinjamById(idanggota)
+            .enqueue(object : Callback<GetPinjamByIdResponse> {
                 override fun onResponse(
-                    call: Call<DetailPinjamResponse>,
-                    response: Response<DetailPinjamResponse>
+                    call: Call<GetPinjamByIdResponse>,
+                    response: Response<GetPinjamByIdResponse>
                 ) {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
                         if (responseBody != null) {
-                            detailResult.value = BaseResponse.Success(responseBody)
-                        }
-                    } else {
-                        val errorBody = response.errorBody()
-                        if (errorBody != null) {
-                            val errorResponse = Gson().fromJson(errorBody.charStream(), ErrorResponse::class.java)
-                            val errorCode = errorResponse.code
-                            val errorMessage = errorResponse.message
-                            detailResult.value = BaseResponse.Error(errorMessage)
-                        } else {
-                            detailResult.value = BaseResponse.Error("Unknown error occurred")
+                            _pinjamid.postValue(responseBody)
                         }
                     }
                 }
 
-                override fun onFailure(call: Call<DetailPinjamResponse>, t: Throwable) {
+                override fun onFailure(call: Call<GetPinjamByIdResponse>, t: Throwable) {
                 }
             })
-        detailResult
     }
+
+    private val _detpinjamid = MutableLiveData<GetDetailPinjamByIdResponse?>()
+    val detpinjamid: LiveData<GetDetailPinjamByIdResponse?> get() = _detpinjamid
+    fun getDetailPinjamById(idpinjam: String) {
+        client.getDetailPinjamById(idpinjam)
+            .enqueue(object : Callback<GetDetailPinjamByIdResponse> {
+                override fun onResponse(
+                    call: Call<GetDetailPinjamByIdResponse>,
+                    response: Response<GetDetailPinjamByIdResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+                        if (responseBody != null) {
+                            _detpinjamid.postValue(responseBody)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<GetDetailPinjamByIdResponse>, t: Throwable) {
+                }
+            })
+    }
+    private val _getpinjam = MutableLiveData<GetIdPinjam?>()
+    val getpinjam: LiveData<GetIdPinjam?> get() = _getpinjam
+
+
+    fun getIdPinjam() {
+        client.getIdPinjam()
+            .enqueue(object : Callback<GetIdPinjam> {
+                override fun onResponse(
+                    call: Call<GetIdPinjam>,
+                    response: Response<GetIdPinjam>
+                ) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+                        if (responseBody != null) {
+                            _getpinjam.postValue(responseBody)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<GetIdPinjam>, t: Throwable) {
+                }
+            })
+    }
+    private val _getbuku = MutableLiveData<GetBookByIdResponse?>()
+    val getbuku: LiveData<GetBookByIdResponse?> get() = _getbuku
+
+    fun getBookById(idbuku: String) {
+        client.getBookById(idbuku)
+            .enqueue(object : Callback<GetBookByIdResponse> {
+                override fun onResponse(
+                    call: Call<GetBookByIdResponse>,
+                    response: Response<GetBookByIdResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+                        if (responseBody != null) {
+                            _getbuku.postValue(responseBody)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<GetBookByIdResponse>, t: Throwable) {
+                }
+            })
+    }
+
+
     fun saveIdBook(idbuku: String) {
         viewModelScope.launch {
             pref.saveIdBook(idbuku)

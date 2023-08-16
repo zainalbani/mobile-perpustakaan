@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="PinjamFragment"
-    android:background="#343434">
+    android:background="#233D8C"
+    tools:context="PinjamFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,8 +18,8 @@
             android:id="@+id/txt_pinjam2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_gravity="center"
+            android:layout_marginTop="30dp"
             android:fontFamily="sans-serif"
             android:text="Data Peminjaman"
             android:textAllCaps="true"
@@ -44,8 +44,8 @@
                 android:padding="25dp">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MyApp.TextInputLayout"
                     android:id="@+id/layoutTanggal"
+                    style="@style/Widget.MyApp.TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -53,11 +53,11 @@
                         android:id="@+id/tglPinjam"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_schedule"
                         android:hint="Tanggal Pinjam"
-                        android:maxLines="1"
-                        android:textColor="@color/black"
                         android:inputType="none"
-                        android:drawableEnd="@drawable/ic_schedule"/>
+                        android:maxLines="1"
+                        android:textColor="@color/black" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,8 +112,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginTop="15dp"
+                    android:backgroundTint="#4169E1"
                     android:text="Pinjam Buku"
-                    android:backgroundTint="#0B0C10"
                     android:textColor="@color/white"
                     app:cornerRadius="10dp" />
 

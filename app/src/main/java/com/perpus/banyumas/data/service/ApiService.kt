@@ -1,6 +1,5 @@
 package com.perpus.banyumas.data.service
 
-import com.perpus.banyumas.data.request.DetailPinjamRequest
 import com.perpus.banyumas.data.request.LoginRequest
 import com.perpus.banyumas.data.request.PasswordRequest
 import com.perpus.banyumas.data.request.PinjamRequest
@@ -23,12 +22,19 @@ interface ApiService {
     @GET("/getallbook")
     fun getAllBook() : Call<GetAllBookResponse>
 
-    @POST("/peminjaman")
-    fun postPinjam(@Body request: PinjamRequest) : Call<PinjamResponse>
+    @GET("/buku/getidpinjam")
+    fun getIdPinjam() : Call<GetIdPinjam>
 
-    @POST("/detailpinjam")
-    fun postDetailPinjam(@Body request: DetailPinjamRequest) : Call<DetailPinjamResponse>
+    @POST("/buku/peminjaman/{idanggota}")
+    fun postPinjam(@Body request: PinjamRequest,@Path("idanggota") idanggota: String) : Call<PinjamResponse>
 
+    @GET("/buku/getpinjambyid/{idanggota}")
+    fun getPinjamById(@Path("idanggota") idanggota: String) : Call<GetPinjamByIdResponse>
 
+    @GET("/buku/getdetpinjambyid/{idpinjam}")
+    fun getDetailPinjamById(@Path("idpinjam") idpinjam: String) : Call<GetDetailPinjamByIdResponse>
+
+    @GET("/buku/getbookbyid/{idbuku}")
+    fun getBookById(@Path("idbuku") idbuku: String) : Call<GetBookByIdResponse>
 
 }

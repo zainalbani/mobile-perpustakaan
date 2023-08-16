@@ -7,7 +7,5 @@ data class DetailPinjamRequest(
     @SerializedName("idbuku")
     val idbuku: String,
     @SerializedName("idpinjam")
-    val idpinjam: String,
-    @SerializedName("jml_buku")
-    val jmlBuku: String
+    val idpinjam: String
 )

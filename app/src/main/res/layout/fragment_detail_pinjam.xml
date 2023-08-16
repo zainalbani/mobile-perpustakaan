@@ -10,52 +10,107 @@
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewProfile"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/cardView"
+            android:layout_width="319dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:layout_marginTop="50dp"
             android:outlineProvider="none"
             app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="10dp">
+            app:cardCornerRadius="12dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="16dp">
-
+                android:padding="25dp">
                 <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Masukkan Jumlah Buku" />
+                    android:text="DATA PEMINJAMAN"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="25sp"
+                    />
 
-                <LinearLayout
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MyApp.TextInputLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etJmlBuku"
+                        android:id="@+id/idPinjam"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:hint="Jumlah Buku"
+                        android:hint="ID Pinjam"
+                        android:maxLines="1"
                         android:textColor="@color/black" />
 
-                </LinearLayout>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MyApp.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/idAnggota"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="ID Anggota"
+                        android:maxLines="1"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MyApp.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/idBuku"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Id Buku"
+                        android:maxLines="1"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MyApp.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/idJudulBuku"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Judul Buku"
+                        android:maxLines="1"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnPinjam"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="15dp"
+                    android:backgroundTint="#4169E1"
                     android:text="Pinjam Buku"
                     android:textColor="@color/white"
-                    app:backgroundTint="#0B0C10"
-                    app:cornerRadius="20dp" />
+                    app:cornerRadius="10dp" />
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </FrameLayout>

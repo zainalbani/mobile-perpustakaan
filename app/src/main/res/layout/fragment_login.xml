@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="LoginFragment"
-    android:background="#343434">
+    android:background="#233D8C">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -138,7 +138,7 @@
                     android:layout_height="55dp"
                     android:layout_marginTop="15dp"
                     android:text="@string/login"
-                    android:backgroundTint="#0B0C10"
+                    android:backgroundTint="#4169E1"
                     android:textColor="@color/white"
                     app:cornerRadius="10dp" />
 

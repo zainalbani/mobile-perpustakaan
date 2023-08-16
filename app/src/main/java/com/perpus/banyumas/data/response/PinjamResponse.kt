@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class PinjamResponse(
     @SerializedName("data")
-    val `data`: DataXXX,
+    val `data`: DataPinjam,
     @SerializedName("message")
     val message: String,
     @SerializedName("status")

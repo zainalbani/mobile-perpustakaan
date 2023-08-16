@@ -3,9 +3,9 @@ package com.perpus.banyumas.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class GetAllBookResponse(
+data class GetPinjamByIdResponse(
     @SerializedName("data")
-    val `data`: List<DataAllBook>,
+    val `data`: List<DataPinjamById>,
     @SerializedName("message")
     val message: String,
     @SerializedName("status")

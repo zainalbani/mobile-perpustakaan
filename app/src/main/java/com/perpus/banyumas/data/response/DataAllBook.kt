@@ -3,7 +3,7 @@ package com.perpus.banyumas.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class DataXX(
+data class DataAllBook(
     @SerializedName("idbuku")
     val idbuku: String,
     @SerializedName("idkatbuku")

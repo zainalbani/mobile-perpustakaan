@@ -34,14 +34,29 @@
                 android:text="Ini Home"
                 android:textColor="@color/white" />
         </LinearLayout>
-        <Button
-            android:id="@+id/btnQR"
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/black"
-            android:text="Scan QR"
-            />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnQR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#4169E1"
+                android:layout_marginLeft="20dp"
+                android:text="Scan QR" />
+
+            <Button
+                android:id="@+id/btnDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#4169E1"
+                android:layout_marginLeft="5dp"
+                android:text="Detail Pinjam" />
+
+        </LinearLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -55,4 +70,4 @@
 
     </LinearLayout>
 
-    </ScrollView>
+</ScrollView>

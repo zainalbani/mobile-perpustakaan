@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.perpus.banyumas.adapter.BukuAdapter
-import com.perpus.banyumas.data.response.DataXX
+import com.perpus.banyumas.data.response.DataAllBook
 import com.perpus.banyumas.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
         toProfile()
         setAdapter()
         scanQR()
+        detailPinjam()
     }
 
     private fun scanQR() {
@@ -46,12 +47,18 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun detailPinjam() {
+        binding.btnDetail.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_peminjamanByIdFragment)
+        }
+    }
+
     private fun setAdapter() {
         val adapter = BukuAdapter()
         homeViewModel.getAllBook()
         homeViewModel.buku.observe(viewLifecycleOwner){
             if (it != null){
-                adapter.setData(it.data as List<DataXX>)
+                adapter.setData(it.data )
             }
         }
         binding.rvBuku.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

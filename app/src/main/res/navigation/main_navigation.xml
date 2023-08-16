@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_scannerFragment"
             app:destination="@id/scannerFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_peminjamanByIdFragment"
+            app:destination="@id/peminjamanByIdFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -55,16 +58,7 @@
         android:name="com.perpus.banyumas.ScannerFragment"
         android:label="ScannerFragment" >
         <action
-            android:id="@+id/action_scannerFragment_to_pinjamFragment"
-            app:destination="@id/pinjamFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/pinjamFragment"
-        android:name="com.perpus.banyumas.PinjamFragment"
-        android:label="fragment_pinjam"
-        tools:layout="@layout/fragment_pinjam" >
-        <action
-            android:id="@+id/action_pinjamFragment_to_detailPinjamFragment"
+            android:id="@+id/action_scannerFragment_to_detailPinjamFragment"
             app:destination="@id/detailPinjamFragment" />
     </fragment>
     <dialog
@@ -75,4 +69,17 @@
             android:id="@+id/action_detailPinjamFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/peminjamanByIdFragment"
+        android:name="com.perpus.banyumas.PeminjamanByIdFragment"
+        android:label="PeminjamanByIdFragment" >
+        <action
+            android:id="@+id/action_peminjamanByIdFragment_to_detailPeminjamanByIdFragment"
+            app:destination="@id/detailPeminjamanByIdFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailPeminjamanByIdFragment"
+        android:name="com.perpus.banyumas.DetailPeminjamanByIdFragment"
+        android:label="fragment_detail_peminjaman_by_id"
+        tools:layout="@layout/fragment_detail_peminjaman_by_id" />
 </navigation>

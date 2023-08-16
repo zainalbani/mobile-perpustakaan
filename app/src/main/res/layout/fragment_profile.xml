@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ProfileFragment"
-    android:background="#343434"
+    android:background="#233D8C"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
@@ -185,7 +185,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="64dp"
                     android:outlineProvider="none"
-                    app:cardBackgroundColor="@color/white"
+                    app:cardBackgroundColor="#4169E1"
                     app:cardCornerRadius="5dp"
                     app:cardElevation="0dp">
 
@@ -202,6 +202,7 @@
                             android:textSize="15dp"
                             android:layout_gravity="center"
                             android:textStyle="bold"
+                            android:textColor="@color/white"
                             android:text="Logout" />
 
                         <ImageView

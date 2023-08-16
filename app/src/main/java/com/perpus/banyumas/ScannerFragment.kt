@@ -29,7 +29,8 @@ class ScannerFragment : Fragment() {
     private var _binding: FragmentScannerBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: BookViewModel
-    private lateinit var codeScanner : CodeScanner
+    private lateinit var profileViewModel: ProfileViewModel
+    private lateinit var codeScanner: CodeScanner
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +38,8 @@ class ScannerFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         viewModel = ViewModelProvider(this)[BookViewModel::class.java]
-        _binding = FragmentScannerBinding.inflate(inflater,container,false)
+        profileViewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
+        _binding = FragmentScannerBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -54,18 +56,23 @@ class ScannerFragment : Fragment() {
     }
 
     private fun toPinjam() {
+        viewModel.getIdPinjam()
         binding.btnPinjam.setOnClickListener {
-            findNavController().navigate(R.id.action_scannerFragment_to_pinjamFragment)
+            viewModel.getpinjam.observe(viewLifecycleOwner){
+                val bundle = Bundle()
+                bundle.putString("idPinjam", it?.data?.idpinjam.toString())
+                findNavController().navigate(R.id.action_scannerFragment_to_detailPinjamFragment, bundle)
+            }
         }
     }
 
     private fun reScan() {
         codeScanner.startPreview()
-        binding.textQR.text="scanning..."
+        binding.textQR.text = "scanning..."
     }
 
     private fun QRScanner() {
-        codeScanner  = CodeScanner(requireContext(), binding.scanView)
+        codeScanner = CodeScanner(requireContext(), binding.scanView)
         codeScanner.apply {
             camera = CodeScanner.CAMERA_BACK
             formats = CodeScanner.ALL_FORMATS
@@ -74,7 +81,7 @@ class ScannerFragment : Fragment() {
             isAutoFocusEnabled = true
             isFlashEnabled = false
             decodeCallback = DecodeCallback {
-                activity?.runOnUiThread{
+                activity?.runOnUiThread {
                     binding.textQR.text = it.text
                     viewModel.saveIdBook(it.text)
 
@@ -91,9 +98,14 @@ class ScannerFragment : Fragment() {
     }
 
     private fun getPermission() {
-        val permission = ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.CAMERA)
-        if (permission != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(android.Manifest.permission.CAMERA), 101)
+        val permission =
+            ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.CAMERA)
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(android.Manifest.permission.CAMERA),
+                101
+            )
         }
     }
 
