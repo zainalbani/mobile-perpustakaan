@@ -9,7 +9,7 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="#4169E1"
         android:layout_marginTop="10dp">
 
         <LinearLayout
@@ -29,6 +29,7 @@
                     android:text="ID BUKU"
                     android:fontFamily="@font/rubik_medium"
                     android:layout_gravity="center_vertical"
+                    android:textColor="@color/white"
                     android:textSize="25sp" />
 
                 <LinearLayout
@@ -45,6 +46,7 @@
                         android:layout_height="wrap_content"
                         android:text="ini judul"
                         android:fontFamily="@font/rubik_medium"
+                        android:textColor="@color/white"
                         android:textSize="25sp" />
 
                     <TextView
@@ -54,6 +56,7 @@
                         android:layout_height="wrap_content"
                         android:text="ini pengarang"
                         android:fontFamily="serif"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
 
                     <TextView
@@ -63,6 +66,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="serif"
                         android:text="ini penerbit"
+                        android:textColor="@color/white"
                         android:textSize="15sp"/>
 
                 </LinearLayout>

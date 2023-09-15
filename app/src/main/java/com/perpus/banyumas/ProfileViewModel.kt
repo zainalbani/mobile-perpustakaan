@@ -50,10 +50,6 @@ class ProfileViewModel @Inject constructor(
 
     val updateResult: MutableLiveData<BaseResponse<PasswordResponse>> = MutableLiveData()
 
-
-    private val _errorLiveData = MutableLiveData<String>()
-    val errorLiveData: LiveData<String> get() = _errorLiveData
-
     fun updatePassword(oldPassword: String, newPassword: String, confirmNewPassword: String, idanggota: String) {
         client.updatePassword(PasswordRequest(oldPassword, newPassword, confirmNewPassword), idanggota)
             .enqueue(object : Callback<PasswordResponse> {

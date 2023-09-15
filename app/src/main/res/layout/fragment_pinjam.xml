@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#233D8C"
-    tools:context="PinjamFragment">
+    android:background="#233D8C">
 
     <LinearLayout
         android:layout_width="match_parent"

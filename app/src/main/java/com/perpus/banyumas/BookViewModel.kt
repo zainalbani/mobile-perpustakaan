@@ -79,14 +79,14 @@ class BookViewModel @Inject constructor(
             })
     }
 
-    private val _detpinjamid = MutableLiveData<GetDetailPinjamByIdResponse?>()
-    val detpinjamid: LiveData<GetDetailPinjamByIdResponse?> get() = _detpinjamid
+    private val _detpinjamid = MutableLiveData<DataDetPinjamById?>()
+    val detpinjamid: LiveData<DataDetPinjamById?> get() = _detpinjamid
     fun getDetailPinjamById(idpinjam: String) {
         client.getDetailPinjamById(idpinjam)
-            .enqueue(object : Callback<GetDetailPinjamByIdResponse> {
+            .enqueue(object : Callback<DataDetPinjamById> {
                 override fun onResponse(
-                    call: Call<GetDetailPinjamByIdResponse>,
-                    response: Response<GetDetailPinjamByIdResponse>
+                    call: Call<DataDetPinjamById>,
+                    response: Response<DataDetPinjamById>
                 ) {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
@@ -96,7 +96,7 @@ class BookViewModel @Inject constructor(
                     }
                 }
 
-                override fun onFailure(call: Call<GetDetailPinjamByIdResponse>, t: Throwable) {
+                override fun onFailure(call: Call<DataDetPinjamById>, t: Throwable) {
                 }
             })
     }

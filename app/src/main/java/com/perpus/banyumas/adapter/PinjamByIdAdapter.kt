@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.perpus.banyumas.data.response.DataPinjamById
 import com.perpus.banyumas.databinding.PinjamListBinding
 
-class PinjamByIdAdapter (private var itemClick: PinjamByIdAdapter.ListPinjamInterface) : RecyclerView.Adapter<PinjamByIdAdapter.ViewHolder>(){
+class PinjamByIdAdapter (private var itemClick: ListPinjamInterface) : RecyclerView.Adapter<PinjamByIdAdapter.ViewHolder>(){
 
     private val differCallback = object : DiffUtil.ItemCallback<DataPinjamById>(){
         override fun areItemsTheSame(

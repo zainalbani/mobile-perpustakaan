@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Perpustakaan" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Perpustakaan" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">#233D8C</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -12,8 +12,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="TextAppearance.MyApp.TitleInput" parent="TextAppearance.MaterialComponents.Headline4">
@@ -21,7 +19,7 @@
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:fontFamily">@font/poppins_medium</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="Widget.MyApp.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -44,5 +42,35 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
+    <style name="FrameBackground">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">354dp</item>
+        <item name="android:background">#233D8C</item>
+    </style>
+
+    <style name="FrameText">
+        <item name="android:layout_width">284dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="TitleName">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="TextDetail">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+
 
 </resources>

@@ -32,7 +32,7 @@ interface ApiService {
     fun getPinjamById(@Path("idanggota") idanggota: String) : Call<GetPinjamByIdResponse>
 
     @GET("/buku/getdetpinjambyid/{idpinjam}")
-    fun getDetailPinjamById(@Path("idpinjam") idpinjam: String) : Call<GetDetailPinjamByIdResponse>
+    fun getDetailPinjamById(@Path("idpinjam") idpinjam: String) : Call<DataDetPinjamById>
 
     @GET("/buku/getbookbyid/{idbuku}")
     fun getBookById(@Path("idbuku") idbuku: String) : Call<GetBookByIdResponse>

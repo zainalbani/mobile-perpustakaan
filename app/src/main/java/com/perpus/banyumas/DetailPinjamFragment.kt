@@ -17,8 +17,7 @@ import com.perpus.banyumas.data.response.PinjamResponse
 import com.perpus.banyumas.databinding.FragmentDetailPinjamBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.util.*
+import java.util.Date
 
 @AndroidEntryPoint
 class DetailPinjamFragment : DialogFragment() {
@@ -27,6 +26,7 @@ class DetailPinjamFragment : DialogFragment() {
     private val binding get() = _binding!!
     private lateinit var viewModel: BookViewModel
     private lateinit var profileViewModel: ProfileViewModel
+    private var kodeBaru = ""
 
     override fun onStart() {
         super.onStart()
@@ -37,7 +37,7 @@ class DetailPinjamFragment : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         viewModel = ViewModelProvider(this)[BookViewModel::class.java]
         profileViewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
@@ -53,12 +53,11 @@ class DetailPinjamFragment : DialogFragment() {
         binding.idJudulBuku.isEnabled = false
         binding.idBuku.isEnabled = false
         val pinjam = arguments?.getString("idPinjam")
-        var kodeBaru = ""
         if (pinjam != null) {
             val charSequence = pinjam.subSequence(9, pinjam.length)
             var substring = charSequence.toString().toInt()
             substring += 1
-            var noBaru = substring.toString()
+            val noBaru = substring.toString()
             val jumlahChar = noBaru.length
 
             if (jumlahChar == 1) {
@@ -95,7 +94,6 @@ class DetailPinjamFragment : DialogFragment() {
             val idAnggota = binding.idAnggota.text.toString()
             val idBuku = binding.idBuku.text.toString()
             val idPinjam = binding.idPinjam.text.toString()
-            val judulBuku = binding.idJudulBuku.text.toString()
 
             viewModel.postPinjam(idPinjam, idBuku, idAnggota)
 
@@ -108,9 +106,11 @@ class DetailPinjamFragment : DialogFragment() {
                 is BaseResponse.Success -> {
                     processUpdate(it.data)
                 }
+
                 is BaseResponse.Error -> {
                     processError(it.msg)
                 }
+
                 else -> {
                 }
             }
@@ -122,8 +122,9 @@ class DetailPinjamFragment : DialogFragment() {
         findNavController().navigate(R.id.action_detailPinjamFragment_to_homeFragment)
         viewModel.removeIdBook()
     }
+
     private fun processError(msg: String?) {
-        snackBar("$msg","Error")
+        snackBar("$msg", "Error")
     }
 
     private fun snackBar(msg: String, status: String) {

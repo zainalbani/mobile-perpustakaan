@@ -13,4 +13,5 @@
     <string name="address_profile">Alama</string>
     <string name="email">Email</string>
     <string name="inputEmail">Masukkan Email</string>
+    <string name="judul_buku">Judul Buku</string>
 </resources>

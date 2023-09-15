@@ -7,16 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.perpus.banyumas.adapter.DetailPinjamByIdAdapter
-import com.perpus.banyumas.adapter.PinjamByIdAdapter
 import com.perpus.banyumas.data.response.*
 import com.perpus.banyumas.databinding.FragmentDetailPeminjamanByIdBinding
-import com.perpus.banyumas.databinding.FragmentPeminjamanByIdBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailPeminjamanByIdFragment : Fragment(), DetailPinjamByIdAdapter.ListPinjamInterface {
+class DetailPeminjamanByIdFragment : Fragment(){
 
     private var _binding: FragmentDetailPeminjamanByIdBinding? = null
     private val binding get() = _binding!!
@@ -34,26 +30,17 @@ class DetailPeminjamanByIdFragment : Fragment(), DetailPinjamByIdAdapter.ListPin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = DetailPinjamByIdAdapter(this)
         val idPinjam = arguments?.getString("idpinjam")
 
         if (idPinjam != null) {
             viewModel.getDetailPinjamById(idPinjam)
         }
         viewModel.detpinjamid.observe(viewLifecycleOwner){
-            if(it != null){
-                adapter.setData(it.data)
-            }
+            binding.tvName.text = it?.data?.buku?.judul.toString()
+            binding.tvIdPinjam.text = "Id Pinjam : " + it?.data?.idpinjam.toString()
+            binding.tvJmlBuku.text = "Jumlah Buku : " + it?.data?.jml_buku.toString()
+            binding.tvIdBuku.text = "Id Buku : " + it?.data?.idbuku.toString()
+            binding.tvDenda.text = "Denda : Rp. " + it?.data?.pinjam?.total_denda.toString()
         }
-        binding.rvDetPinjam.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        binding.rvDetPinjam.adapter = adapter
     }
-
-    override fun pinjam(idbuku: String) {
-        val bundle = Bundle()
-        bundle.putString("idbuku", idbuku)
-        findNavController().navigate(R.id.action_homeFragment_to_peminjamanByIdFragment,bundle)
-
-    }
-
 }
