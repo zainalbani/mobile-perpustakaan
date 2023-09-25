@@ -1,11 +1,15 @@
-package com.perpus.banyumas
+package com.perpus.banyumas.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
+import com.perpus.banyumas.data.response.BaseResponse
 import com.perpus.banyumas.data.response.DataAllBook
+import com.perpus.banyumas.data.response.ErrorResponse
 import com.perpus.banyumas.data.response.GetAllBookResponse
+import com.perpus.banyumas.data.response.PinjamResponse
 import com.perpus.banyumas.data.service.ApiService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
@@ -20,10 +24,10 @@ class HomeViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
     private val list = ArrayList<DataAllBook>()
-    private val _buku = MutableLiveData<GetAllBookResponse?>()
-    val buku: LiveData<GetAllBookResponse?> get() = _buku
+    val bukuResult: MutableLiveData<BaseResponse<GetAllBookResponse>> = MutableLiveData()
 
     fun getAllBook() {
+        bukuResult.value = BaseResponse.Loading()
         client.getAllBook()
             .enqueue(object : Callback<GetAllBookResponse> {
                 override fun onResponse(
@@ -33,13 +37,25 @@ class HomeViewModel @Inject constructor(
                     if (response.isSuccessful) {
                         val responseBody = response.body()
                         if (responseBody != null) {
-                            _buku.postValue(responseBody)
+                            bukuResult.value = BaseResponse.Success(responseBody)
+                        }
+                    } else {
+                        val errorBody = response.errorBody()
+                        if (errorBody != null) {
+                            val errorResponse = Gson().fromJson(errorBody.charStream(), ErrorResponse::class.java)
+                            val errorCode = errorResponse.code
+                            val errorMessage = errorResponse.message
+                            bukuResult.value = BaseResponse.Error(errorMessage)
+                        } else {
+                            bukuResult.value = BaseResponse.Error("Unknown error occurred")
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<GetAllBookResponse>, t: Throwable) {
+                    bukuResult.value = BaseResponse.Error("Network Error")
                 }
             })
+        bukuResult
     }
 }

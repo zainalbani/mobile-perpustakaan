@@ -1,19 +1,15 @@
-package com.perpus.banyumas
+package com.perpus.banyumas.ui
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
+import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.budiyev.android.codescanner.AutoFocusMode
@@ -21,6 +17,9 @@ import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
+import com.perpus.banyumas.viewmodel.BookViewModel
+import com.perpus.banyumas.viewmodel.ProfileViewModel
+import com.perpus.banyumas.R
 import com.perpus.banyumas.databinding.FragmentScannerBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -48,8 +47,10 @@ class ScannerFragment : Fragment() {
         getPermission()
         QRScanner()
         reScan()
-        toPinjam()
 
+        binding.btnPinjam.setOnClickListener {
+            Toast.makeText(requireContext(), "Error: SCAN QR terlebih dahulu", Toast.LENGTH_SHORT).show()
+        }
         binding.cardRescan.setOnClickListener {
             reScan()
         }
@@ -58,10 +59,15 @@ class ScannerFragment : Fragment() {
     private fun toPinjam() {
         viewModel.getIdPinjam()
         binding.btnPinjam.setOnClickListener {
-            viewModel.getpinjam.observe(viewLifecycleOwner){
+            viewModel.getpinjam.observe(viewLifecycleOwner) {
                 val bundle = Bundle()
                 bundle.putString("idPinjam", it?.data?.idpinjam.toString())
-                findNavController().navigate(R.id.action_scannerFragment_to_detailPinjamFragment, bundle)
+                if (it != null) {
+                    findNavController().navigate(
+                        R.id.action_scannerFragment_to_detailPinjamFragment,
+                        bundle
+                    )
+                }
             }
         }
     }
@@ -84,7 +90,7 @@ class ScannerFragment : Fragment() {
                 activity?.runOnUiThread {
                     binding.textQR.text = it.text
                     viewModel.saveIdBook(it.text)
-
+                    toPinjam()
                 }
             }
             errorCallback = ErrorCallback {
@@ -99,14 +105,13 @@ class ScannerFragment : Fragment() {
 
     private fun getPermission() {
         val permission =
-            ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.CAMERA)
+            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
         if (permission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
                 requireActivity(),
-                arrayOf(android.Manifest.permission.CAMERA),
+                arrayOf(Manifest.permission.CAMERA),
                 101
             )
         }
     }
-
 }

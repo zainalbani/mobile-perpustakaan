@@ -1,9 +1,8 @@
-package com.perpus.banyumas
+package com.perpus.banyumas.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
 import com.google.gson.Gson
-import com.perpus.banyumas.data.request.DetailPinjamRequest
 import com.perpus.banyumas.data.request.PinjamRequest
 import com.perpus.banyumas.data.response.*
 import com.perpus.banyumas.data.service.ApiService
@@ -25,6 +24,7 @@ class BookViewModel @Inject constructor(
     val pinjamResult: MutableLiveData<BaseResponse<PinjamResponse>> = MutableLiveData()
 
     fun postPinjam(idpinjam: String, idbuku: String, idanggota: String) {
+        pinjamResult.value = BaseResponse.Loading()
         client.postPinjam(PinjamRequest(idpinjam, idbuku), idanggota)
             .enqueue(object : Callback<PinjamResponse> {
                 override fun onResponse(
@@ -50,16 +50,17 @@ class BookViewModel @Inject constructor(
                 }
 
                 override fun onFailure(call: Call<PinjamResponse>, t: Throwable) {
+                    pinjamResult.value = BaseResponse.Error("Network Error")
                 }
             })
         pinjamResult
     }
 
-    private val _pinjamid = MutableLiveData<GetPinjamByIdResponse?>()
-    val pinjamid: LiveData<GetPinjamByIdResponse?> get() = _pinjamid
+    val pinjamid: MutableLiveData<BaseResponse<GetPinjamByIdResponse>> = MutableLiveData()
 
 
     fun getPinjamById(idanggota: String) {
+        pinjamid.value = BaseResponse.Loading()
         client.getPinjamById(idanggota)
             .enqueue(object : Callback<GetPinjamByIdResponse> {
                 override fun onResponse(
@@ -69,14 +70,26 @@ class BookViewModel @Inject constructor(
                     if (response.isSuccessful) {
                         val responseBody = response.body()
                         if (responseBody != null) {
-                            _pinjamid.postValue(responseBody)
+                            pinjamid.value = BaseResponse.Success(responseBody)
+                        } else {
+                            val errorBody = response.errorBody()
+                            if (errorBody != null) {
+                                val errorResponse =
+                                    Gson().fromJson(errorBody.charStream(), ErrorResponse::class.java)
+                                val errorMessage = errorResponse.message
+                                pinjamid.value = BaseResponse.Error(errorMessage)
+                            } else {
+                                pinjamid.value = BaseResponse.Error("Unknown error occurred")
+                            }
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<GetPinjamByIdResponse>, t: Throwable) {
+                    pinjamid.value = BaseResponse.Error("Network Error")
                 }
             })
+        pinjamid
     }
 
     private val _detpinjamid = MutableLiveData<DataDetPinjamById?>()
@@ -142,6 +155,29 @@ class BookViewModel @Inject constructor(
                 }
 
                 override fun onFailure(call: Call<GetBookByIdResponse>, t: Throwable) {
+                }
+            })
+    }
+
+    private val _detailbuku = MutableLiveData<GetDetailBuku?>()
+    val detailbuku: LiveData<GetDetailBuku?> get() = _detailbuku
+
+    fun getDetailBuku(idbuku: String) {
+        client.getDetailBuku(idbuku)
+            .enqueue(object : Callback<GetDetailBuku> {
+                override fun onResponse(
+                    call: Call<GetDetailBuku>,
+                    response: Response<GetDetailBuku>
+                ) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+                        if (responseBody != null) {
+                            _detailbuku.postValue(responseBody)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<GetDetailBuku>, t: Throwable) {
                 }
             })
     }

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ProfileFragment"
     android:background="#233D8C"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context=".ui.ProfileFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,42 +18,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:gravity="start"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginStart="20dp"
-                        android:orientation="horizontal">
-                    </LinearLayout>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardView"
-                        android:layout_width="180dp"
-                        android:layout_height="180dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="30dp"
-                        app:cardCornerRadius="200dp">
-
-                        <ImageView
-                            android:id="@+id/profile_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            tools:src="@tools:sample/avatars" />
-
-                    </androidx.cardview.widget.CardView>
-
-                </LinearLayout>
 
 
                 <com.google.android.material.button.MaterialButton
@@ -62,9 +27,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/edit"
+                    android:layout_marginTop="100dp"
                     android:backgroundTint="@color/white"
+                    android:text="@string/edit"
                     android:textColor="@color/black"
                     app:cornerRadius="20dp" />
 
@@ -85,14 +50,20 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
+                        <ProgressBar
+                            android:id="@+id/progressBar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:visibility="gone" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:fontFamily="@font/rubik_medium"
                             android:text="@string/profile"
-                            android:textAllCaps="true"
-                            />
+                            android:textAllCaps="true" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -102,8 +73,8 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_baseline_person_24"
-                                android:padding="10dp"/>
+                                android:padding="10dp"
+                                android:src="@drawable/ic_baseline_person_24" />
 
                             <TextView
 
@@ -111,7 +82,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="Nama Lengkap" />
+                                tools:text="Nama Lengkap" />
 
                         </LinearLayout>
 
@@ -125,14 +96,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="10dp"
-                                android:src="@drawable/ic_baseline_home_work_24"/>
+                                android:src="@drawable/ic_baseline_home_work_24" />
 
                             <TextView
                                 android:id="@+id/tvKategori"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="Kategori" />
+                                tools:text="Kategori" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -143,15 +114,15 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_baseline_phone_android_24"
-                                android:padding="10dp" />
+                                android:padding="10dp"
+                                android:src="@drawable/ic_baseline_phone_android_24" />
 
                             <TextView
                                 android:id="@+id/tvPhone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="No Hp" />
+                                tools:text="No Hp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -162,15 +133,15 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_baseline_grid_4x4_24"
-                                android:padding="10dp" />
+                                android:padding="10dp"
+                                android:src="@drawable/ic_baseline_grid_4x4_24" />
 
                             <TextView
                                 android:id="@+id/tvId"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="Id Anggota" />
+                                tools:text="Id Anggota" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -199,18 +170,18 @@
                             android:id="@+id/txtLogout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="15dp"
                             android:layout_gravity="center"
-                            android:textStyle="bold"
+                            android:text="Logout"
                             android:textColor="@color/white"
-                            android:text="Logout" />
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
 
                         <ImageView
                             android:id="@+id/imgLogout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:src="@drawable/ic_baseline_logout_24"/>
+                            android:src="@drawable/ic_baseline_logout_24" />
 
                     </LinearLayout>
 

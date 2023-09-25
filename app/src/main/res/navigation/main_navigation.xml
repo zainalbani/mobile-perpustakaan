@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.perpus.banyumas.HomeFragment"
+        android:name="com.perpus.banyumas.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -19,10 +19,16 @@
         <action
             android:id="@+id/action_homeFragment_to_peminjamanByIdFragment"
             app:destination="@id/peminjamanByIdFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_koleksiFragment"
+            app:destination="@id/koleksiFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.perpus.banyumas.LoginFragment"
+        android:name="com.perpus.banyumas.ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -31,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.perpus.banyumas.ProfileFragment"
+        android:name="com.perpus.banyumas.ui.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile">
         <action
@@ -46,7 +52,7 @@
     </fragment>
     <dialog
         android:id="@+id/editPasswordFragment"
-        android:name="com.perpus.banyumas.EditPasswordFragment"
+        android:name="com.perpus.banyumas.ui.EditPasswordFragment"
         android:label="fragment_edit_password"
         tools:layout="@layout/fragment_edit_password" >
         <action
@@ -55,7 +61,7 @@
     </dialog>
     <fragment
         android:id="@+id/scannerFragment"
-        android:name="com.perpus.banyumas.ScannerFragment"
+        android:name="com.perpus.banyumas.ui.ScannerFragment"
         android:label="ScannerFragment" >
         <action
             android:id="@+id/action_scannerFragment_to_detailPinjamFragment"
@@ -63,7 +69,7 @@
     </fragment>
     <dialog
         android:id="@+id/detailPinjamFragment"
-        android:name="com.perpus.banyumas.DetailPinjamFragment"
+        android:name="com.perpus.banyumas.ui.DetailPinjamFragment"
         android:label="DetailPinjamFragment" >
         <action
             android:id="@+id/action_detailPinjamFragment_to_homeFragment"
@@ -71,7 +77,7 @@
     </dialog>
     <fragment
         android:id="@+id/peminjamanByIdFragment"
-        android:name="com.perpus.banyumas.PeminjamanByIdFragment"
+        android:name="com.perpus.banyumas.ui.PeminjamanByIdFragment"
         android:label="PeminjamanByIdFragment" >
         <action
             android:id="@+id/action_peminjamanByIdFragment_to_detailPeminjamanByIdFragment"
@@ -79,7 +85,30 @@
     </fragment>
     <fragment
         android:id="@+id/detailPeminjamanByIdFragment"
-        android:name="com.perpus.banyumas.DetailPeminjamanByIdFragment"
+        android:name="com.perpus.banyumas.ui.DetailPeminjamanByIdFragment"
         android:label="fragment_detail_peminjaman_by_id"
         tools:layout="@layout/fragment_detail_peminjaman_by_id" />
+    <fragment
+        android:id="@+id/koleksiFragment"
+        android:name="com.perpus.banyumas.ui.KoleksiFragment"
+        android:label="fragment_koleksi"
+        tools:layout="@layout/fragment_koleksi" >
+        <action
+            android:id="@+id/action_koleksiFragment_to_detailBukuFragment"
+            app:destination="@id/detailBukuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.perpus.banyumas.ui.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_detailBukuFragment"
+            app:destination="@id/detailBukuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailBukuFragment"
+        android:name="com.perpus.banyumas.DetailBukuFragment"
+        android:label="fragment_detail_buku"
+        tools:layout="@layout/fragment_detail_buku" />
 </navigation>

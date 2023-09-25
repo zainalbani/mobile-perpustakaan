@@ -1,13 +1,19 @@
-package com.perpus.banyumas
+package com.perpus.banyumas.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.perpus.banyumas.R
+import com.perpus.banyumas.adapter.SearchBookAdapter
+import com.perpus.banyumas.data.response.BaseResponse
 import com.perpus.banyumas.databinding.FragmentProfileBinding
+import com.perpus.banyumas.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,13 +43,27 @@ class ProfileFragment : Fragment() {
             viewModel.getUserProfile(it)
         }
 
-        viewModel.user.observe(viewLifecycleOwner) {
-            binding.apply {
-                if (it != null) {
-                    tvNama.text = it.data?.nama.toString()
-                    tvKategori.text = it.data?.kategori.toString()
-                    tvPhone.text = it.data?.nohp.toString()
-                    tvId.text = it.data?.idanggota.toString()
+        viewModel.userResult.observe(viewLifecycleOwner) {
+            when(it){
+                is BaseResponse.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+
+                is BaseResponse.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.tvNama.text = it.data!!.data.nama
+                    binding.tvKategori.text = it.data.data.kategori
+                    binding.tvPhone.text = it.data.data.nohp
+                    binding.tvId.text = it.data.data.idanggota
+
+                }
+
+                is BaseResponse.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), "Error: ${it.msg}", Toast.LENGTH_SHORT).show()
+                }
+
+                else -> {
 
                 }
             }

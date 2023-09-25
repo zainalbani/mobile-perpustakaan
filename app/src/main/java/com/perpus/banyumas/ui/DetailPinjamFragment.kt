@@ -1,7 +1,7 @@
-package com.perpus.banyumas
+package com.perpus.banyumas.ui
 
 import android.app.AlertDialog
-import android.content.ContentValues.TAG
+import android.content.ContentValues
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -12,6 +12,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.perpus.banyumas.viewmodel.BookViewModel
+import com.perpus.banyumas.viewmodel.ProfileViewModel
+import com.perpus.banyumas.R
 import com.perpus.banyumas.data.response.BaseResponse
 import com.perpus.banyumas.data.response.PinjamResponse
 import com.perpus.banyumas.databinding.FragmentDetailPinjamBinding
@@ -53,8 +56,10 @@ class DetailPinjamFragment : DialogFragment() {
         binding.idJudulBuku.isEnabled = false
         binding.idBuku.isEnabled = false
         val pinjam = arguments?.getString("idPinjam")
-        if (pinjam != null) {
-            val charSequence = pinjam.subSequence(9, pinjam.length)
+        if (pinjam == "null") {
+            kodeBaru = "001"
+        } else {
+            val charSequence = pinjam?.subSequence(9, pinjam.length)
             var substring = charSequence.toString().toInt()
             substring += 1
             val noBaru = substring.toString()
@@ -67,9 +72,6 @@ class DetailPinjamFragment : DialogFragment() {
             } else {
                 kodeBaru = noBaru
             }
-
-        } else {
-            kodeBaru = "001"
         }
         val currentDate = Date()
         val dateFormat = SimpleDateFormat("yyyyMMdd")
@@ -77,7 +79,7 @@ class DetailPinjamFragment : DialogFragment() {
 
         val idPinjamBaru = formattedDate + kodeBaru
         binding.idPinjam.setText(idPinjamBaru)
-        Log.d(TAG, "onViewCreated: ${idPinjamBaru}")
+        Log.d(ContentValues.TAG, "onViewCreated: ${idPinjamBaru}")
         profileViewModel.getId().observe(viewLifecycleOwner) {
             binding.idAnggota.setText(it)
         }

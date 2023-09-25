@@ -1,15 +1,15 @@
-package com.perpus.banyumas
+package com.perpus.banyumas.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.perpus.banyumas.adapter.BukuAdapter
-import com.perpus.banyumas.data.response.DataAllBook
+import com.perpus.banyumas.viewmodel.HomeViewModel
+import com.perpus.banyumas.viewmodel.LoginViewModel
+import com.perpus.banyumas.R
 import com.perpus.banyumas.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,34 +36,37 @@ class HomeFragment : Fragment() {
 
         setUsername()
         toProfile()
-        setAdapter()
         scanQR()
         detailPinjam()
+        koleksiBuku()
+        searchBuku()
     }
 
+    private fun searchBuku() {
+        binding.cardPencarian.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        }
+    }
+
+    private fun koleksiBuku() {
+        binding.cardKoleksi.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_koleksiFragment)
+        }
+    }
+
+
     private fun scanQR() {
-        binding.btnQR.setOnClickListener {
+        binding.cardPinjam.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_scannerFragment)
         }
     }
 
     private fun detailPinjam() {
-        binding.btnDetail.setOnClickListener {
+        binding.cardDetail.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_peminjamanByIdFragment)
         }
     }
 
-    private fun setAdapter() {
-        val adapter = BukuAdapter()
-        homeViewModel.getAllBook()
-        homeViewModel.buku.observe(viewLifecycleOwner){
-            if (it != null){
-                adapter.setData(it.data )
-            }
-        }
-        binding.rvBuku.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        binding.rvBuku.adapter = adapter
-    }
 
     private fun toProfile() {
         binding.toProfile.setOnClickListener {

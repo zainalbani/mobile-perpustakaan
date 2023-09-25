@@ -37,4 +37,9 @@ interface ApiService {
     @GET("/buku/getbookbyid/{idbuku}")
     fun getBookById(@Path("idbuku") idbuku: String) : Call<GetBookByIdResponse>
 
+    @GET("/buku/getdetailbuku/{idbuku}")
+    fun getDetailBuku(@Path("idbuku") idbuku: String) : Call<GetDetailBuku>
+
+    @GET("/search/book")
+    fun searchBook(@Query("keyword") keyword:String) : Call<SearchBookResponse>
 }

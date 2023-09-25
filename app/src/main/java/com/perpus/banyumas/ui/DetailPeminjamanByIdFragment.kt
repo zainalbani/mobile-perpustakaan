@@ -1,15 +1,20 @@
-package com.perpus.banyumas
+package com.perpus.banyumas.ui
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.perpus.banyumas.data.response.*
+import com.perpus.banyumas.viewmodel.BookViewModel
 import com.perpus.banyumas.databinding.FragmentDetailPeminjamanByIdBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Date
 
 @AndroidEntryPoint
 class DetailPeminjamanByIdFragment : Fragment(){
@@ -37,10 +42,30 @@ class DetailPeminjamanByIdFragment : Fragment(){
         }
         viewModel.detpinjamid.observe(viewLifecycleOwner){
             binding.tvName.text = it?.data?.buku?.judul.toString()
-            binding.tvIdPinjam.text = "Id Pinjam : " + it?.data?.idpinjam.toString()
-            binding.tvJmlBuku.text = "Jumlah Buku : " + it?.data?.jml_buku.toString()
-            binding.tvIdBuku.text = "Id Buku : " + it?.data?.idbuku.toString()
-            binding.tvDenda.text = "Denda : Rp. " + it?.data?.pinjam?.total_denda.toString()
+            binding.tvIdBuku.text = "ISSN : " + it!!.data.idbuku
+            binding.tvIdPinjam.text = "Id Pinjam : " + it.data.idpinjam
+            binding.tvTglPinjam.text = "Tanggal Pinjam : " + it.data.pinjam.tglpinjam
+
+            val tglPinjam = it.data.pinjam.tglpinjam
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val datePinjam = LocalDate.parse(tglPinjam, formatter)
+            val dateNow = LocalDate.now()
+
+            val selisih = datePinjam.until(dateNow).days
+            Log.d(TAG, "onViewCreated: ${selisih}")
+
+            if(selisih > 7){
+                val operasi = selisih - 7
+                val jumlahDenda = operasi * 500
+
+                binding.tvDenda.text = "Denda : Rp." + jumlahDenda.toString()
+            }
+            else {
+                binding.tvDenda.text = "Denda : Rp. 0"
+            }
+
         }
+
+
     }
 }

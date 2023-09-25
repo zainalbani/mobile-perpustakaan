@@ -14,4 +14,19 @@
     <string name="email">Email</string>
     <string name="inputEmail">Masukkan Email</string>
     <string name="judul_buku">Judul Buku</string>
+    <string name="title_home">Home</string>
+    <string name="title_profile">Profile</string>
+    <string name="searchbar_hint">Cari idbuku, judul, penerbit dan pengarang...</string>
+
+    <string-array name="data_name">
+        <item>Pinjam Buku</item>
+        <item>Koleksi Buku</item>
+        <item>Detail Buku</item>
+    </string-array>
+    <integer-array name="data_photo">
+        <item>@drawable/pinjam</item>
+        <item>@drawable/koleksi</item>
+        <item>@drawable/search</item>
+
+    </integer-array>
 </resources>

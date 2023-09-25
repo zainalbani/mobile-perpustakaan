@@ -30,14 +30,14 @@
             <TextView
                 android:id="@+id/tv_name"
                 style="@style/TitleName"
-                android:text="@string/judul_buku" />
+                tools:text="@string/judul_buku" />
 
         </FrameLayout>
 
         <TextView
             android:id="@+id/tv_tentang"
             style="@style/TextDetail"
-            android:text="Detail Pinjam  "
+            android:text="Detail Buku "
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/frameText"
             app:layout_constraintStart_toStartOf="@+id/frameText"
@@ -47,38 +47,37 @@
         <TextView
             android:id="@+id/tv_id_buku"
             style="@style/TextDetail"
-            android:layout_marginTop="8dp"
-            android:text="Id Buku"
+            tools:text="Id Buku"
             app:layout_constraintEnd_toEndOf="@+id/tv_tentang"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tv_tentang"
             app:layout_constraintTop_toBottomOf="@+id/tv_tentang" />
 
         <TextView
-            android:id="@+id/tv_id_pinjam"
+            android:id="@+id/tv_penerbit_buku"
             style="@style/TextDetail"
-            android:text="Id Pinjam"
             app:layout_constraintEnd_toEndOf="@+id/tv_id_buku"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tv_id_buku"
-            app:layout_constraintTop_toBottomOf="@+id/tv_id_buku" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_id_buku"
+            tools:text="Penerbit Buku" />
 
         <TextView
-            android:id="@+id/tv_tgl_pinjam"
+            android:id="@+id/tv_kategori_buku"
             style="@style/TextDetail"
-            android:text="Tanggal Pinjam"
-            app:layout_constraintEnd_toEndOf="@+id/tv_id_pinjam"
+            app:layout_constraintEnd_toEndOf="@+id/tv_penerbit_buku"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tv_id_pinjam"
-            app:layout_constraintTop_toBottomOf="@+id/tv_id_pinjam" />
+            app:layout_constraintStart_toStartOf="@+id/tv_penerbit_buku"
+            app:layout_constraintTop_toBottomOf="@+id/tv_penerbit_buku"
+            tools:text="Kategori Buku" />
 
         <TextView
-            android:id="@+id/tv_denda"
+            android:id="@+id/tv_rak_buku"
             style="@style/TextDetail"
-            android:text="Denda"
-            app:layout_constraintEnd_toEndOf="@+id/tv_tgl_pinjam"
-            app:layout_constraintStart_toStartOf="@+id/tv_tgl_pinjam"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tgl_pinjam" />
+            app:layout_constraintEnd_toEndOf="@+id/tv_id_buku"
+            app:layout_constraintStart_toStartOf="@+id/tv_id_buku"
+            app:layout_constraintTop_toBottomOf="@+id/tv_kategori_buku"
+            tools:text="Rak Buku" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

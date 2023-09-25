@@ -5,23 +5,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.perpus.banyumas.data.response.DataAllBook
+import com.perpus.banyumas.data.response.DataSearch
 import com.perpus.banyumas.databinding.BukuListBinding
 
-class BukuAdapter(private var itemClick: ListBukuInterface) :
-    RecyclerView.Adapter<BukuAdapter.ViewHolder>() {
+class SearchBookAdapter(private var itemClick: SearchBookInterface) : RecyclerView.Adapter<SearchBookAdapter.ViewHolder>(){
 
-    private val differCallback = object : DiffUtil.ItemCallback<DataAllBook>() {
+    private val differCallback = object : DiffUtil.ItemCallback<DataSearch>(){
         override fun areItemsTheSame(
-            oldItem: DataAllBook,
-            newItem: DataAllBook
+            oldItem: DataSearch,
+            newItem: DataSearch
         ): Boolean {
-            return oldItem.idbuku == oldItem.idbuku
+            return true
         }
 
         override fun areContentsTheSame(
-            oldItem: DataAllBook,
-            newItem: DataAllBook
+            oldItem: DataSearch,
+            newItem: DataSearch
         ): Boolean {
             return oldItem == newItem
         }
@@ -32,18 +31,16 @@ class BukuAdapter(private var itemClick: ListBukuInterface) :
     inner class ViewHolder(private val binding: BukuListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: DataAllBook) {
-            with(item) {
+        fun bind(item: DataSearch) {
+            with(binding) {
 
-                binding.tvIdBuku.text = item.idbuku
-                binding.tvTitle.text = item.judul
-                binding.tvPenerbit.text = item.penerbit
-                binding.tvPengarang.text = item.pengarang
-
-                binding.card.setOnClickListener{
-                    itemClick.buku(item.idbuku)
+                tvIdBuku.text = item.idbuku
+                tvTitle.text = item.judul
+                tvPenerbit.text = item.penerbit
+                tvPengarang.text = item.pengarang
+                itemView.setOnClickListener {
+                    itemClick.idbuku(item.idbuku)
                 }
-
             }
 
         }
@@ -62,12 +59,10 @@ class BukuAdapter(private var itemClick: ListBukuInterface) :
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
-
-    fun setData(data: List<DataAllBook>) {
+    fun setData(data : List<DataSearch>){
         differ.submitList(data)
     }
-
-    interface ListBukuInterface {
-        fun buku(idbuku: String)
+    interface SearchBookInterface {
+        fun idbuku(idbuku: String)
     }
 }

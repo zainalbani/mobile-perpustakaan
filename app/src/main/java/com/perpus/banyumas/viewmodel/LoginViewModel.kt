@@ -1,4 +1,4 @@
-package com.perpus.banyumas
+package com.perpus.banyumas.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
